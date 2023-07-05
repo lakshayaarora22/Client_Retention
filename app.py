@@ -78,15 +78,7 @@ def predict():
                                            'PaymentMethod', 'tenure'])
 
     df_2 = pd.concat([df_1, new_df], ignore_index = True)
-    # Group the tenure in bins of 12 months
     labels = ["{0} - {1}".format(i, i + 11) for i in range(1, 72, 12)]
-
-    df_2['tenure_group'] = pd.cut(df_2.tenure.astype(int), range(1, 80, 12), right=False, labels=labels)
-    #drop column customerID and tenure
-    df_2.drop(columns= ['tenure'], axis=1, inplace=True)
-
-
-
 
     new_df__dummies = pd.get_dummies(df_2[['gender', 'SeniorCitizen', 'Partner', 'Dependents', 'PhoneService',
            'MultipleLines', 'InternetService', 'OnlineSecurity', 'OnlineBackup',
